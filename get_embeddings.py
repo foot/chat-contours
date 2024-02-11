@@ -96,8 +96,15 @@ if __name__ == "__main__":
     file_path = 'data/chats_data2023-09-27.json'
     conversation_data = load_data(file_path)
 
-    sample_conversations = conversation_data[150:200]
-    # Write the processed data to a JSON file
-    output_file_path = 'processed_conversations-150-200.json'
+    ranges = [
+        [0, 50],
+        [50, 100],
+        [100, 150],
+        [150, 200],
+    ]
 
-    gen_embedding(sample_conversations, output_file_path)
+    for r in ranges:
+        sample_conversations = conversation_data[r[0]:r[1]]
+        # Write the processed data to a JSON file
+        output_file_path = f'processed_conversations-${r[0]}-${r[1]}.json'
+        gen_embedding(sample_conversations, output_file_path)
