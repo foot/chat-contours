@@ -14,12 +14,19 @@ const SmoothLineChart = ({
 }: SmoothLineChartProps) => {
   const width = 800;
   const height = 800;
+  const padding = 20;
 
   const xExtent = d3.extent(embeddings, (d) => d.x) as [number, number];
   const yExtent = d3.extent(embeddings, (d) => d.y) as [number, number];
 
-  const xScale = d3.scaleLinear().domain(xExtent).range([0, width]);
-  const yScale = d3.scaleLinear().domain(yExtent).range([height, 0]);
+  const xScale = d3
+    .scaleLinear()
+    .domain(xExtent)
+    .range([0 + padding, width - padding]);
+  const yScale = d3
+    .scaleLinear()
+    .domain(yExtent)
+    .range([height - padding, 0 + padding]);
 
   const lineGenerator = d3
     .line<{ x: number; y: number }>()
